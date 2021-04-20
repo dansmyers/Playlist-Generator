@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+    <!-- Head contains metadata on the whole document -->
+    <head>
+        <title>Playlist Generator</title>
+        
+        <style>
+            
+            body {
+                font-family: Helvetica, Arial, sans-serif;
+                font-size: 18pt;
+                width: 66%;
+                margin: auto;
+                background-color: #FAFAFA;
+                color: #222222;
+            }
+            
+            input {
+                font-size: 16pt;
+                padding: .25em .5em .25em .5em;
+            }
+            
+            button {
+                font-size: 16pt;
+                padding: .25em .5em .25em .5em;
+            }
+            
+        </style>
+    </head>
+
+    <!-- Body contains the page's content -->
+    <body>
+        <h1>90s and 00s Playlist Generator</h1>
+        
+        <h2>Featuring Orlando's own Backstreet Boys and *NSYNC</h2>
+
+        <p>This application generates randomized playlists using an algorithm based on
+        <a href="https://medium.com/pinterest-engineering/introducing-pixie-an-advanced-graph-based-recommendation-system-e7b4229b664b">
+            Pixie</a>, Pinterest's graph-based recommendation system.</p>
+            
+        <p>This is a demo and only plays 30-second excerpts of each song. You might get some weird stuff but that's part of the fun.</p>
+
+        <button type="button" id="submitButton"> Click to generate a new playlist </button>
+        
+        <br/><br/>
+
+        <!-- The div tag creates a named region of the page -->
+        <div id="responseDiv"></div>
+        
+
+        <!-- script tag contains JavaScript that interacts with page elements -->
+        <script>
+            // Set a listener function for the button click
+            document.getElementById('submitButton').onclick = function () {
+
+                // Create and send an HTTP request
+                var oReq = new XMLHttpRequest();
+                oReq.addEventListener("load", responseListener);
+                oReq.open("GET", "/playlist");
+                oReq.send();
+            }
+
+            // Listener runs when the server's response comes back
+            function responseListener() {
+                document.getElementById('responseDiv').innerHTML = this.responseText;
+            }
+        </script>
+    </body>
+</html>

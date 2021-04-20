@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+    <!-- Head contains metadata on the whole document -->
+    <head>
+        <title>CMS 330 REST Demo</title>
+    </head>
+
+    <!-- Body contains the page's content -->
+    <body>
+        <h1>Input</h1>
+
+        <p>Type your name in the box below and press Submit.</p>
+
+        <input type="text" id="inputBox" />
+        <button type="button" id="submitButton"> Submit </button>
+
+        <!-- The div tag creates a named region of the page -->
+        <div id="responseDiv"></div>
+
+        <!-- script tag contains JavaScript that interacts with page elements -->
+        <script>
+            // Set a listener function for the button click
+            document.getElementById('submitButton').onclick = function () {
+
+                // Get the current string in the text box
+                var input = document.getElementById('inputBox').value;
+
+                // Create and send an HTTP request
+                var oReq = new XMLHttpRequest();
+                oReq.addEventListener("load", responseListener);
+                oReq.open("GET", "https://clever-saga_80.ide.mimir.io/hello?name=" + input);
+                oReq.send();
+            }
+
+            // Listener runs when the server's response comes back
+            function responseListener() {
+                document.getElementById('responseDiv').innerHTML = this.responseText;
+            }
+        </script>
+    </body>
+</html>

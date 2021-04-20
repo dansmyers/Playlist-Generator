@@ -1,2 +1,1 @@
-# Playlist-Generator
-Starter code for graph-based playlist recommendation system project
+# CMS 167 Java Spring Boot Lab
